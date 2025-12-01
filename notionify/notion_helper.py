@@ -15,7 +15,7 @@ class NotionHelper:
     heatmap_block_id = None
 
     def __init__(self):
-       self.client = Client(auth=os.getenv("NOTION_TOKEN"), log_level=logging.ERROR)
+        self.client = Client(auth=os.getenv("NOTION_TOKEN"), log_level=logging.ERROR)
         self.page_id = extract_page_id(os.getenv("NOTION_PAGE"))
         self.__cache = {}
 
