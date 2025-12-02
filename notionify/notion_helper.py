@@ -80,12 +80,15 @@ class NotionHelper:
     @retry(stop_max_attempt_number=3, wait_fixed=5000)
     def query_all(self, database_id):
         """获取database中所有的数据"""
+        db = self.client.databases.retrieve(database_id)
+        data_source_id = db["data_sources"][0]["id"]
+
         results = []
         has_more = True
         start_cursor = None
         while has_more:
             response = self.client.data_sources.query(
-                data_source_id=database_id,
+                data_source_id=data_source_id,
                 start_cursor=start_cursor,
                 page_size=100,
             )
